@@ -7,5 +7,15 @@ app
     host: '0.0.0.0',
   })
   .then(() => {
-    console.log(`listening on port ${env.PORT}`)
+    console.log(`Server started`)
+    console.log(`
+        🐿️ 🐿️ 🐿️    🐿️      🐿️   🐿️    🐿️            🐿️ 🐿️ 🐿️ 🐿️
+      🐿️       🐿️   🐿️    🐿️    🐿️    🐿️          🐿️         🐿️
+         🐿️        🐿️  🐿️      🐿️    🐿️          🐿️         🐿️
+           🐿️      🐿️ 🐿️       🐿️    🐿️          🐿️         🐿️
+             🐿️    🐿️   🐿️     🐿️    🐿️          🐿️         🐿️
+      🐿️       🐿️   🐿️    🐿️    🐿️    🐿️          🐿️         🐿️
+        🐿️ 🐿️ 🐿️    🐿️      🐿️   🐿️    🐿️ 🐿️ 🐿️ 🐿️      🐿️ 🐿️ 🐿️ 🐿️
+    `)
+    console.log(`🚀 🚀 listening on port ${env.PORT} 🚀 🚀`)
   })
