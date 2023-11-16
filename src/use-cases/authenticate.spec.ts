@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users.repository'
 import { Prisma } from '@prisma/client'
 import { hash } from 'bcryptjs'
@@ -6,10 +6,15 @@ import { AuthenticateUseCase } from './authenticate'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
 
 describe('Authenticate use case', () => {
-  it('should be able to authenticate', async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(inMemoryUsersRepository)
+  let inMemoryUsersRepository: InMemoryUsersRepository
+  let sut: AuthenticateUseCase
 
+  beforeEach(() => {
+    inMemoryUsersRepository = new InMemoryUsersRepository()
+    sut = new AuthenticateUseCase(inMemoryUsersRepository)
+  })
+
+  it('should be able to authenticate', async () => {
     const user = {
       email: 'user@example.com',
       password_hash: await hash('password', 6),
@@ -27,9 +32,6 @@ describe('Authenticate use case', () => {
   })
 
   it('should be not able to authenticate with a wrong password', async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(inMemoryUsersRepository)
-
     const user = {
       email: 'user@example.com',
       password_hash: await hash('password', 6),
@@ -47,9 +49,6 @@ describe('Authenticate use case', () => {
   })
 
   it('should be not able to authenticate with a wrong email', async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(inMemoryUsersRepository)
-
     expect(() =>
       sut.execute({
         email: 'user@example.com',
