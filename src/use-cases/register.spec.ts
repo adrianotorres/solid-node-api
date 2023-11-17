@@ -5,12 +5,12 @@ import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-user
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 
 describe('Register use case', () => {
-  let inMemoryUsersRepository: InMemoryUsersRepository
   let sut: RegisterUseCase
+  let usersRepository: InMemoryUsersRepository
 
   beforeEach(() => {
-    inMemoryUsersRepository = new InMemoryUsersRepository()
-    sut = new RegisterUseCase(inMemoryUsersRepository)
+    usersRepository = new InMemoryUsersRepository()
+    sut = new RegisterUseCase(usersRepository)
   })
 
   it('should be able to register', async () => {
