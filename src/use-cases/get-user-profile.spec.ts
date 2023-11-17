@@ -18,14 +18,14 @@ describe('Get User Profile use case', () => {
       name: 'user',
       password_hash: 'password',
     })
-    const { user } = await sut.execute(createdUser.id)
+    const { user } = await sut.execute({ userId: createdUser.id })
 
     expect(user.name).toEqual('user')
   })
 
   it('should not be able to get user profile with wrong id', async () => {
-    expect(() => sut.execute('id-unexistent')).rejects.toBeInstanceOf(
-      ResourceNotFoundError,
-    )
+    await expect(() =>
+      sut.execute({ userId: 'id-unexistent' }),
+    ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })
